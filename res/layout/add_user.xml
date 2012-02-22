@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:weightSum="1">
+    <ScrollView android:layout_width="match_parent" android:layout_weight="0.87" android:layout_height="match_parent" android:id="@+id/addUserScroll">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/addUserLinearLayout">
+            <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/uname" android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/addUserUname"></TextView>
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/addUserUnameText" android:maxLines="1" android:imeOptions="actionNext" android:inputType="text|textNoSuggestions">
+                <requestFocus></requestFocus>
+            </EditText>
+            <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/addUserPassword" android:text="@string/pass"></TextView>
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPassword" android:id="@+id/addUserPasswordText" android:maxLines="1" android:imeOptions="actionNext"></EditText>
+            <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/server" android:id="@+id/addUserServer"></TextView>
+            <Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/addUserServerSelect" android:entries="@array/server_list"></Spinner>
+            <Button android:text="@string/submit" android:id="@+id/addUserSubmit" android:layout_height="wrap_content" android:layout_width="match_parent" android:onClick="submit"></Button>
+        </LinearLayout>
+    </ScrollView>
+    
+</LinearLayout>

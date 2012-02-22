@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="zipcodeman.glookup"
+      android:versionName="1.06" android:versionCode="9">
+    <uses-sdk android:targetSdkVersion="8" android:minSdkVersion="8"/>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:name=".GlookupFrontendActivity"
+                  android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="AddUserActivity" android:launchMode="standard"></activity>
+        <activity android:name="MainGradesActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout"></activity>
+        <activity android:name="SubGradeActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout"></activity>
+        <activity android:name="org.achartengine.GraphicalActivity"></activity>
+
+    </application>
+</manifest>
