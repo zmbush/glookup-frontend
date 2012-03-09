@@ -1,4 +1,4 @@
-package zipcodeman.glookup;
+package com.zmbush.glookup;
 
 //import java.io.BufferedInputStream;
 //import java.io.BufferedReader;
@@ -14,6 +14,7 @@ package zipcodeman.glookup;
 //import com.jcraft.jsch.JSchException;
 //import com.jcraft.jsch.Session;
 
+import zipcodeman.glookup.R;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.ContentValues;

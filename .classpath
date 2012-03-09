@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="/home/zach/Downloads/jsch-0.1.44.jar"/>
 	<classpathentry kind="lib" path="/home/zach/Downloads/achartengine-0.7.0.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="lib" path="/home/zach/Downloads/jsch-0.1.46.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

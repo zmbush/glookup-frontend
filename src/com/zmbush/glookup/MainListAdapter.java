@@ -1,4 +1,4 @@
-package zipcodeman.glookup;
+package com.zmbush.glookup;
 import zipcodeman.glookup.R;
 import android.app.Activity;
 import android.content.Context;
