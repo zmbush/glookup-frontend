@@ -37,21 +37,18 @@ public class MainListAdapter extends BaseAdapter {
 		TextView one = (TextView)convertView.findViewById(R.id.main_list_text_1);
 		TextView two = (TextView)convertView.findViewById(R.id.main_list_text_2);
     	TextView three = (TextView)convertView.findViewById(R.id.main_list_text_3);
-    	TextView commentText = (TextView)convertView.findViewById(R.id.comment_text);
 		if(position == 0){
 			String row = rows[position];
 			String[] items = row.split(":");
 			one.setText(items[0]);
 			String rest = items[1].replaceFirst("[ ]*", "");
-			String[] other = rest.split(" ");
-			two.setText("");
-			three.setText("");
-			commentText.setText(rest.replace(".", "").replace("_", " "));
+			String[] other = rest.replace(".", "").split(" ");
+			two.setText(other[0].replace("_", " "));
+			three.setText(other[1].replace("_", " "));
 		}else if(position == 1){
 			one.setText("Assignment");
 			two.setText("Score");
 			three.setText("Weight");
-			commentText.setText("");
 		}else{
 			String firstStripped = rows[position].replaceFirst("[ ]*", "");
 			String[] firstSplit = firstStripped.split(":");
@@ -83,11 +80,25 @@ public class MainListAdapter extends BaseAdapter {
 				}
 			}
 			
-			one.setText(assignName);
-			two.setText(score);
-			three.setText(weight);
-			commentText.setText(comment);
-			if(!assignName.equals("Total") && !assignName.equals("Extrapolated total") || true){
+			if(comment != ""){
+				convertView = this.mInflater.inflate(R.layout.comment_main_list_item, null);
+				
+				one = (TextView)convertView.findViewById(R.id.main_list_text_1);
+				two = (TextView)convertView.findViewById(R.id.main_list_text_2);
+		    	three = (TextView)convertView.findViewById(R.id.main_list_text_3);
+		    	
+		    	TextView commentText = (TextView)convertView.findViewById(R.id.comment_text);
+		    	
+				one.setText(assignName);
+				two.setText(score);
+				three.setText(weight);
+				commentText.setText(comment);
+			}else{
+				one.setText(assignName);
+				two.setText(score);
+				three.setText(weight);
+			}
+			if(!assignName.equals("Extrapolated total")){
 				convertView.setClickable(true);
 				convertView.setOnClickListener(new MainListClickListner(comment, parent, assignName, 
 												uname, pass, server, this.mAct));

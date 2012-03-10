@@ -3,30 +3,27 @@
     <TableRow android:id="@+id/tableRow1" 
     		  android:gravity="center" 
     		  android:layout_gravity="fill"
-    		  android:weightSum="3" 
+    		  android:weightSum="2" 
     		  android:layout_width="match_parent" android:layout_height="50dp">
         <TextView   android:textAppearance="?android:attr/textAppearanceLarge" 
-        			android:id="@+id/main_list_text_1" 
         			android:text="TextView" 
         			android:gravity="left" 
         			android:layout_height="wrap_content"
         			android:layout_width = "0dp"
-        			android:layout_weight="1"></TextView>
+        			android:layout_weight="1" android:id="@+id/sub_list_text_1"></TextView>
         <TextView 	android:text="TextView" 
         		 	android:layout_height="wrap_content" 
         			android:textAppearance="?android:attr/textAppearanceLarge" 
         		 	android:layout_width="0dp" 
         		 	android:layout_weight="1" 
-        		 	android:gravity="center" 
-        		 	android:id="@+id/main_list_text_2"></TextView>
-        <TextView 	android:text="TextView" 
-        		 	android:layout_height="wrap_content" 
-        			android:textAppearance="?android:attr/textAppearanceLarge" 
-        		 	android:layout_width="0dp" 
-        		 	android:layout_weight="1" 
-        		 	android:gravity="right" 
-        		 	android:id="@+id/main_list_text_3"></TextView>
+        		 	android:gravity="right" android:id="@+id/sub_list_text_2"></TextView>
         
     </TableRow>
+
+    <TextView
+        android:id="@+id/comment_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>

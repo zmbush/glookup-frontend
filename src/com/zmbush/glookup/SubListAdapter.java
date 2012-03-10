@@ -125,6 +125,7 @@ public class SubListAdapter extends BaseAdapter {
 			position -= 2;
 			String firstStripped = rows[position].replaceFirst("[ ]*", "");
 			String[] firstSplit = firstStripped.split(":");
+			String rank = "";
 			
 			String stat = firstSplit[0];
 			firstStripped = firstSplit[1].replaceFirst("[ ]*", "");
@@ -134,6 +135,18 @@ public class SubListAdapter extends BaseAdapter {
 				score = firstStripped;
 			}else{
 				score = firstStripped.substring(0, end);
+				String[] paren = rows[position].replaceFirst("[ ]*", "").split("\\(");
+				if(paren.length > 1){
+					rank = paren[1].replace(")", "");
+					convertView = this.mInflater.inflate(R.layout.comment_sub_list_item, null);
+					one = (TextView)convertView.findViewById(R.id.sub_list_text_1);
+					two = (TextView)convertView.findViewById(R.id.sub_list_text_2);
+					TextView comment = (TextView)convertView.findViewById(R.id.comment_text);
+					comment.setText(rank);
+					one.setText(stat);
+					two.setText(score);
+					return convertView;
+				}
 			}
 			
 			one.setText(stat);
