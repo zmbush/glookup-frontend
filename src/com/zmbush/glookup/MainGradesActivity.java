@@ -10,7 +10,7 @@ package com.zmbush.glookup;
 //import com.jcraft.jsch.Session;
 
 // import android.app.Activity;
-import zipcodeman.glookup.R;
+import com.zmbush.glookup.R;
 import android.app.ListActivity;
 import android.content.Intent;
 //import android.content.SharedPreferences;

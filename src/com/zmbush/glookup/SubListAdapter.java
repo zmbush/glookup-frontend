@@ -1,8 +1,7 @@
 package com.zmbush.glookup;
-import zipcodeman.glookup.R;
+import com.zmbush.glookup.R;
 import android.app.Activity;
 import android.content.Context;
-//import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

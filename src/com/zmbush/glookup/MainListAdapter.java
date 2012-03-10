@@ -1,5 +1,5 @@
 package com.zmbush.glookup;
-import zipcodeman.glookup.R;
+import com.zmbush.glookup.R;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -36,19 +36,22 @@ public class MainListAdapter extends BaseAdapter {
 		
 		TextView one = (TextView)convertView.findViewById(R.id.main_list_text_1);
 		TextView two = (TextView)convertView.findViewById(R.id.main_list_text_2);
-		TextView three = (TextView)convertView.findViewById(R.id.main_list_text_3);
+    	TextView three = (TextView)convertView.findViewById(R.id.main_list_text_3);
+    	TextView commentText = (TextView)convertView.findViewById(R.id.comment_text);
 		if(position == 0){
 			String row = rows[position];
 			String[] items = row.split(":");
 			one.setText(items[0]);
 			String rest = items[1].replaceFirst("[ ]*", "");
 			String[] other = rest.split(" ");
-			two.setText(other[0]);
-			three.setText(other[1]);
+			two.setText("");
+			three.setText("");
+			commentText.setText(rest.replace(".", "").replace("_", " "));
 		}else if(position == 1){
 			one.setText("Assignment");
 			two.setText("Score");
-			three.setText("Reader");
+			three.setText("Weight");
+			commentText.setText("");
 		}else{
 			String firstStripped = rows[position].replaceFirst("[ ]*", "");
 			String[] firstSplit = firstStripped.split(":");
@@ -58,7 +61,7 @@ public class MainListAdapter extends BaseAdapter {
 			int end = firstStripped.indexOf(" ");
 			String score = "";
 			String grader = "";
-//			String weight = "";
+			String weight = "";
 			String comment = "";
 			if(end == -1){
 				score = firstStripped;
@@ -68,7 +71,7 @@ public class MainListAdapter extends BaseAdapter {
 				firstStripped = firstStripped.substring(end).replaceFirst("[ ]*", "");
 				end = firstStripped.indexOf(" ");
 				if(end != -1){
-//					weight = firstStripped.substring(0, end);
+					weight = firstStripped.substring(0, end);
 					firstStripped = firstStripped.substring(end).replaceFirst("[ ]*", "");
 					end = firstStripped.indexOf(" ");
 					if(end != -1){
@@ -82,9 +85,9 @@ public class MainListAdapter extends BaseAdapter {
 			
 			one.setText(assignName);
 			two.setText(score);
-			three.setText(grader);
-			
-			if(!assignName.equals("Total") && !assignName.equals("Extrapolated total")){
+			three.setText(weight);
+			commentText.setText(comment);
+			if(!assignName.equals("Total") && !assignName.equals("Extrapolated total") || true){
 				convertView.setClickable(true);
 				convertView.setOnClickListener(new MainListClickListner(comment, parent, assignName, 
 												uname, pass, server, this.mAct));
