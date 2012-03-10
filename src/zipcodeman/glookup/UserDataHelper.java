@@ -1,4 +1,4 @@
-package com.zmbush.glookup;
+package zipcodeman.glookup;
 
 import android.content.Context;
 import android.database.Cursor;

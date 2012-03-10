@@ -1,6 +1,6 @@
-package com.zmbush.glookup;
+package zipcodeman.glookup;
 
-import com.zmbush.glookup.R;
+import zipcodeman.glookup.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Configuration;

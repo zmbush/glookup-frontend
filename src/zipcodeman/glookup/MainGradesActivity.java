@@ -1,4 +1,4 @@
-package com.zmbush.glookup;
+package zipcodeman.glookup;
 
 //import java.io.BufferedReader;
 //import java.io.IOException;
@@ -10,7 +10,7 @@ package com.zmbush.glookup;
 //import com.jcraft.jsch.Session;
 
 // import android.app.Activity;
-import com.zmbush.glookup.R;
+import zipcodeman.glookup.R;
 import android.app.ListActivity;
 import android.content.Intent;
 //import android.content.SharedPreferences;

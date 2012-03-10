@@ -1,4 +1,4 @@
-package com.zmbush.glookup;
+package zipcodeman.glookup;
 
 import java.io.BufferedReader;
 import java.io.IOException;

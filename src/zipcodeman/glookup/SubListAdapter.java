@@ -1,5 +1,5 @@
-package com.zmbush.glookup;
-import com.zmbush.glookup.R;
+package zipcodeman.glookup;
+import zipcodeman.glookup.R;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
