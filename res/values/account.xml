@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_name">Glookup</string>
+    <string name="title_fmt">Account Details</string>
+    <string name="key1_action">username</string>
+    <string name="key1_summary">User Name</string>
+    
+</resources>
