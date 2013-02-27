@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,20 +63,25 @@ public class GlookupFrontendActivity extends ListActivity {
 	private SQLiteDatabase readOnly;
 	private SQLiteDatabase writeOnly;
 	
+	private ImageButton add_user;
+	private ImageButton settings;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.main);
+       
+        setContentView(R.layout.main);
         
         dataDB = new LoginDataHelper(this);
         readOnly = dataDB.getReadableDatabase();
         writeOnly = dataDB.getWritableDatabase();
-        this.registerForContextMenu(getListView());
         
         scheduleAlarmReceiver(this);
         
         loadList();
+
+        this.registerForContextMenu(getListView());
     }
     
     @Override
@@ -233,7 +239,14 @@ public class GlookupFrontendActivity extends ListActivity {
     		}
     	}
     }
+    
+    public void onMenuAddClick(View v) {
+    	addAccount();
+    }
 
+    public void onPreferencesClick(View v) {
+    	Toast.makeText(this, "Soon...", Toast.LENGTH_LONG).show();
+    }
     private void addAccount(){
     	Intent addUser = new Intent(this, AddUserActivity.class);
     	GlookupFrontendActivity.this.startActivityForResult(addUser, ADD_USER_RESULT);

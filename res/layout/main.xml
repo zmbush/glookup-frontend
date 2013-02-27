@@ -4,5 +4,45 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-    <ListView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/glookupList"></ListView>
+
+
+    
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" 
+        >
+    </ListView>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/add_account_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/add_user"
+            android:src="@android:drawable/ic_menu_add"
+            android:onClick="onMenuAddClick" />
+
+        <ImageButton
+            android:id="@+id/app_settings_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/settings"
+            android:src="@android:drawable/ic_menu_preferences"
+            android:onClick="onPreferencesClick" />
+    </LinearLayout>
+
 </LinearLayout>

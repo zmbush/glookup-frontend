@@ -13,7 +13,8 @@
         <item>hive1.cs.berkeley.edu</item>
     </string-array>
     <string name="connect">Connect</string>
-    <string name="delete_connection">Delete Connection</string>
-    <string name="edit_connection">Edit Connection</string>
+    <string name="delete_connection">Delete Account</string>
+    <string name="edit_connection">Edit Account</string>
     <string name="reload_grades">Reload Grades</string>
+    <string name="settings">Settings</string>
 </resources>
