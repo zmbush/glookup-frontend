@@ -6,10 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-//import android.widget.Filter;
-//import android.widget.Filterable;
 import android.widget.TextView;
-//import java.util.regex.*;
 
 public class MainListAdapter extends BaseAdapter {
 	
@@ -57,12 +54,12 @@ public class MainListAdapter extends BaseAdapter {
 			
 			int end = restOfAssignmentString.indexOf(" ");
 			String score = "";
-			String grader = "";
+			// String grader = "";
 			String weight = "";
 			String comment = "";
 			if(end == -1){
 				score = restOfAssignmentString;
-				grader = "";
+				// grader = "";
 			}else{
 				score = restOfAssignmentString.substring(0, end);
 				restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
@@ -72,10 +69,10 @@ public class MainListAdapter extends BaseAdapter {
 					restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
 					end = restOfAssignmentString.indexOf(" ");
 					if(end != -1){
-						grader = restOfAssignmentString.substring(0, end);
+						// grader = restOfAssignmentString.substring(0, end);
 						comment = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
 					}else{
-						grader = restOfAssignmentString;
+						// grader = restOfAssignmentString;
 					}
 				}
 			}

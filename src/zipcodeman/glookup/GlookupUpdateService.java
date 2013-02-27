@@ -1,11 +1,9 @@
 package zipcodeman.glookup;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -22,9 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
