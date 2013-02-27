@@ -2,6 +2,7 @@ package zipcodeman.glookup;
 import zipcodeman.glookup.R;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,7 @@ import android.widget.TextView;
 
 public class MainListAdapter extends BaseAdapter {
 	
-	private LayoutInflater mInflater;	
-	// private Context mContext;
+	private LayoutInflater mInflater;
 	private Activity mAct;
 	private String[] rows;
 	private String uname;
@@ -20,7 +20,6 @@ public class MainListAdapter extends BaseAdapter {
 	
 	MainListAdapter(String[] rows, String uname, String pass, String server, Context c, Activity act){
 		this.mInflater = LayoutInflater.from(c);
-		// this.mContext = c;
 		this.rows = rows;
 		this.mAct = act;
 		this.uname = uname;
@@ -54,12 +53,12 @@ public class MainListAdapter extends BaseAdapter {
 			
 			int end = restOfAssignmentString.indexOf(" ");
 			String score = "";
-			// String grader = "";
+			String grader = "";
 			String weight = "";
 			String comment = "";
 			if(end == -1){
 				score = restOfAssignmentString;
-				// grader = "";
+				grader = "";
 			}else{
 				score = restOfAssignmentString.substring(0, end);
 				restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
@@ -69,13 +68,15 @@ public class MainListAdapter extends BaseAdapter {
 					restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
 					end = restOfAssignmentString.indexOf(" ");
 					if(end != -1){
-						// grader = restOfAssignmentString.substring(0, end);
+						grader = restOfAssignmentString.substring(0, end);
 						comment = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
 					}else{
-						// grader = restOfAssignmentString;
+						grader = restOfAssignmentString;
 					}
 				}
 			}
+			
+			Log.i("MainListAdapter", "I found that the grader was: " + grader);
 			
 			if(comment != ""){
 				convertView = this.mInflater.inflate(R.layout.comment_main_list_item, null);
@@ -101,9 +102,6 @@ public class MainListAdapter extends BaseAdapter {
 												uname, pass, server, this.mAct));
 			}
 		}
-		
-		
-		
 		return convertView;
 	}
 
