@@ -27,6 +27,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
@@ -46,6 +47,7 @@ public class GlookupFrontendActivity extends ListActivity {
 
 	public static final int ADD_USER_RESULT = 0;
 	public static final int EDIT_USER_RESULT = 1;
+	public static final int PREFERENCES_RESULT = 2;
 	public static final String ADD_USER_USERNAME = "username";
 	public static final String ADD_USER_PASSWORD = "password";
 	public static final String ADD_USER_SERVER = "server";
@@ -77,7 +79,7 @@ public class GlookupFrontendActivity extends ListActivity {
         readOnly = dataDB.getReadableDatabase();
         writeOnly = dataDB.getWritableDatabase();
         
-        scheduleAlarmReceiver(this);
+        scheduleAlarmReceiver();
         
         loadList();
 
@@ -196,6 +198,9 @@ public class GlookupFrontendActivity extends ListActivity {
         case R.id.addAccount:
         	addAccount();
             return true;
+        case R.id.settings:
+        	updatePreferences();
+        	return true;
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -237,6 +242,8 @@ public class GlookupFrontendActivity extends ListActivity {
     				loadList();
     			}
     		}
+    	} else if(requestCode == PREFERENCES_RESULT) {
+    		scheduleAlarmReceiver();
     	}
     }
     
@@ -245,8 +252,14 @@ public class GlookupFrontendActivity extends ListActivity {
     }
 
     public void onPreferencesClick(View v) {
-    	Toast.makeText(this, "Soon...", Toast.LENGTH_LONG).show();
+    	updatePreferences();
     }
+    
+    private void updatePreferences() {
+    	Intent updatePref = new Intent(this, SettingsActivity.class);
+    	GlookupFrontendActivity.this.startActivityForResult(updatePref, PREFERENCES_RESULT);
+    }
+    
     private void addAccount(){
     	Intent addUser = new Intent(this, AddUserActivity.class);
     	GlookupFrontendActivity.this.startActivityForResult(addUser, ADD_USER_RESULT);
@@ -261,18 +274,25 @@ public class GlookupFrontendActivity extends ListActivity {
     	GlookupFrontendActivity.this.startActivityForResult(editUser, EDIT_USER_RESULT);
     }
     
+    private void scheduleAlarmReceiver() {
+    	scheduleAlarmReceiver(this);
+    }
+    
     public static void scheduleAlarmReceiver(Context context) {
-    	SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    	SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+    	
+
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        PendingIntent pendingIntent =
+                 PendingIntent.getBroadcast(context, 0, new Intent(context, GlookupAlarmReceiver.class),
+                          PendingIntent.FLAG_CANCEL_CURRENT);
         
         if (pref.getBoolean("check-for-updates", false)) {
-	        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-	        PendingIntent pendingIntent =
-	                 PendingIntent.getBroadcast(context, 0, new Intent(context, GlookupAlarmReceiver.class),
-	                          PendingIntent.FLAG_CANCEL_CURRENT);
-	
 	        // Use inexact repeating which is easier on battery (system can phase events and not wake at exact times)
 	        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, Constants.UPDATE_STARTUP_TIME,
 	                 				     Constants.UPDATE_FREQUENCY, pendingIntent);
+        } else {
+        	alarmMgr.cancel(pendingIntent);
         }
      }
 }

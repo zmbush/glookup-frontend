@@ -76,6 +76,7 @@ public class SubGradeActivity extends ListActivity {
 		assign = in.getStringExtra(SUB_GRADE_ASSIGNMENT);
 		comments = in.getStringExtra(SUB_GRADE_COMMENTS);
 		
+		setTitle("Assignment Details For: " + assign);
 		loadData();
 	}
 	@Override
