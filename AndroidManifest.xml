@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="zipcodeman.glookup"
-      android:versionName="2.0 Beta" android:versionCode="11">
+      android:versionName="1.08" android:versionCode="12">
     <uses-sdk android:targetSdkVersion="8" android:minSdkVersion="8"/>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>

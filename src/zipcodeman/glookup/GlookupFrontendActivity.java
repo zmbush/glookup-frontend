@@ -73,10 +73,7 @@ public class GlookupFrontendActivity extends ListActivity {
         writeOnly = dataDB.getWritableDatabase();
         this.registerForContextMenu(getListView());
         
-        SharedPreferences pref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        
-        if (pref.getBoolean("check-for-updates", true))
-        	scheduleAlarmReceiver(this);
+        scheduleAlarmReceiver(this);
         
         loadList();
     }
@@ -252,13 +249,17 @@ public class GlookupFrontendActivity extends ListActivity {
     }
     
     public static void scheduleAlarmReceiver(Context context) {
-        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent =
-                 PendingIntent.getBroadcast(context, 0, new Intent(context, GlookupAlarmReceiver.class),
-                          PendingIntent.FLAG_CANCEL_CURRENT);
-
-        // Use inexact repeating which is easier on battery (system can phase events and not wake at exact times)
-        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, Constants.UPDATE_STARTUP_TIME,
-                 				     Constants.UPDATE_FREQUENCY, pendingIntent);
+    	SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        
+        if (pref.getBoolean("check-for-updates", false)) {
+	        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+	        PendingIntent pendingIntent =
+	                 PendingIntent.getBroadcast(context, 0, new Intent(context, GlookupAlarmReceiver.class),
+	                          PendingIntent.FLAG_CANCEL_CURRENT);
+	
+	        // Use inexact repeating which is easier on battery (system can phase events and not wake at exact times)
+	        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, Constants.UPDATE_STARTUP_TIME,
+	                 				     Constants.UPDATE_FREQUENCY, pendingIntent);
+        }
      }
 }
