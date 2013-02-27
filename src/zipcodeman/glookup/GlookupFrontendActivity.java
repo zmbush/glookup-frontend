@@ -16,14 +16,19 @@ package zipcodeman.glookup;
 
 import zipcodeman.glookup.R;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.ListActivity;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 //import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
@@ -65,10 +70,17 @@ public class GlookupFrontendActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.main);
+        
         dataDB = new LoginDataHelper(this);
         readOnly = dataDB.getReadableDatabase();
         writeOnly = dataDB.getWritableDatabase();
         this.registerForContextMenu(getListView());
+        
+        SharedPreferences pref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        
+        if (pref.getBoolean("check-for-updates", true))
+        	scheduleAlarmReceiver(this);
+        
         loadList();
     }
     
@@ -241,4 +253,15 @@ public class GlookupFrontendActivity extends ListActivity {
     	editUser.putExtra(ADD_USER_SERVER, server);
     	GlookupFrontendActivity.this.startActivityForResult(editUser, EDIT_USER_RESULT);
     }
+    
+    public static void scheduleAlarmReceiver(Context context) {
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        PendingIntent pendingIntent =
+                 PendingIntent.getBroadcast(context, 0, new Intent(context, GlookupAlarmReceiver.class),
+                          PendingIntent.FLAG_CANCEL_CURRENT);
+
+        // Use inexact repeating which is easier on battery (system can phase events and not wake at exact times)
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, Constants.UPDATE_STARTUP_TIME,
+                 				     Constants.UPDATE_FREQUENCY, pendingIntent);
+     }
 }

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainListAdapter extends BaseAdapter {
 	
-	private LayoutInflater mInflater;
+	private LayoutInflater mInflater;	
 	// private Context mContext;
 	private Activity mAct;
 	private String[] rows;
@@ -50,32 +50,32 @@ public class MainListAdapter extends BaseAdapter {
 			two.setText("Score");
 			three.setText("Weight");
 		}else{
-			String firstStripped = rows[position].replaceFirst("[ ]*", "");
-			String[] firstSplit = firstStripped.split(":");
+			String rawRow = rows[position].replaceFirst("[ ]*", "");
+			String[] assignmentParts = rawRow.split(":", 2);
+			String assignName = assignmentParts[0];
+			String restOfAssignmentString = assignmentParts[1].replaceFirst("[ ]*", "");
 			
-			String assignName = firstSplit[0];
-			firstStripped = firstSplit[1].replaceFirst("[ ]*", "");
-			int end = firstStripped.indexOf(" ");
+			int end = restOfAssignmentString.indexOf(" ");
 			String score = "";
 			String grader = "";
 			String weight = "";
 			String comment = "";
 			if(end == -1){
-				score = firstStripped;
+				score = restOfAssignmentString;
 				grader = "";
 			}else{
-				score = firstStripped.substring(0, end);
-				firstStripped = firstStripped.substring(end).replaceFirst("[ ]*", "");
-				end = firstStripped.indexOf(" ");
+				score = restOfAssignmentString.substring(0, end);
+				restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
+				end = restOfAssignmentString.indexOf(" ");
 				if(end != -1){
-					weight = firstStripped.substring(0, end);
-					firstStripped = firstStripped.substring(end).replaceFirst("[ ]*", "");
-					end = firstStripped.indexOf(" ");
+					weight = restOfAssignmentString.substring(0, end);
+					restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
+					end = restOfAssignmentString.indexOf(" ");
 					if(end != -1){
-						grader = firstStripped.substring(0, end);
-						comment = firstStripped.substring(end).replaceFirst("[ ]*", "");
+						grader = restOfAssignmentString.substring(0, end);
+						comment = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
 					}else{
-						grader = firstStripped;
+						grader = restOfAssignmentString;
 					}
 				}
 			}
