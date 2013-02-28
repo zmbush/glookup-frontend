@@ -295,8 +295,8 @@ public class GlookupFrontendActivity extends ListActivity {
                  PendingIntent.getBroadcast(context, 0, new Intent(context, GlookupAlarmReceiver.class),
                           PendingIntent.FLAG_CANCEL_CURRENT);
         
-        if (pref.getBoolean("check-for-updates", false)) {
-        	String refresh = pref.getString("refresh-frequency", "1h");
+        if (pref.getBoolean("check-for-updates", true)) {
+        	String refresh = pref.getString("refresh-frequency", "3h");
         	long update_freq = Constants.UPDATE_FREQUENCY;
         	switch (refresh.charAt(refresh.length() - 1)) {
         	case 'm':

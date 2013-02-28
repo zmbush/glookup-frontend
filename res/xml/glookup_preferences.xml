@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     
     
-    <PreferenceCategory android:title="Grade Notification"><CheckBoxPreference android:title="Check for grade updates" android:key="check-for-updates" android:defaultValue="false" android:summaryOn="Occasionally poll to check if grades have been updated" android:summaryOff="Do not check if grades have been updated" android:enabled="true" android:disableDependentsState="false" /><ListPreference android:entries="@array/reload_timeframe" android:dialogTitle="Refresh Frequency" android:entryValues="@array/reload_names" android:title="Refresh Frequency" android:key="refresh-frequency" android:dependency="check-for-updates" android:defaultValue="1h" /></PreferenceCategory>
+    <PreferenceCategory android:title="Grade Notification"><CheckBoxPreference android:title="Check for grade updates" android:key="check-for-updates" android:defaultValue="true" android:summaryOn="Occasionally poll to check if grades have been updated" android:summaryOff="Do not check if grades have been updated" android:enabled="true" android:disableDependentsState="false" /><ListPreference android:entries="@array/reload_timeframe" android:dialogTitle="Update Frequency" android:entryValues="@array/reload_names" android:title="Change Update Frequency" android:key="refresh-frequency" android:dependency="check-for-updates" android:defaultValue="1h" android:summary="How often glookup will check for grade updates."/></PreferenceCategory>
     
 
 </PreferenceScreen>
