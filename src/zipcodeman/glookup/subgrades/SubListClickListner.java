@@ -77,7 +77,8 @@ public class SubListClickListner implements OnClickListener {
 	    renderer.setXAxisMax(xmax);
 	    renderer.setYAxisMin(ymin);
 	    renderer.setYAxisMax(ymax);
-	    renderer.setPanEnabled(false);
+	    renderer.setPanEnabled(false, false);
+	    renderer.setZoomEnabled(false, false);
 	}
 	public void onClick(View v) {
 		prepareGraph();

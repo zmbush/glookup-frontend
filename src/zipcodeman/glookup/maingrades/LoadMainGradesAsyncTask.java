@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import zipcodeman.glookup.util.SSHExecute;
+
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -44,7 +46,7 @@ public class LoadMainGradesAsyncTask extends
 	private String getProgressString(int prog){
 		switch(prog){
 		case PROG_INIT:
-			return "Starting";
+			return "Loading...";
 		case PROG_CONNECT:
 			return "Connecting";
 		case PROG_LOGIN:
@@ -64,41 +66,13 @@ public class LoadMainGradesAsyncTask extends
 		uname = params[0];
 		pass = params[1];
 		server = params[2];
-		       
-        JSch jsch = new JSch();
-        Session ses;
-        String read = new String();
+		
         publishProgress(PROG_INIT);
-        try{
-        	ses = jsch.getSession(uname, server);
-        	publishProgress(PROG_CONNECT);
-            ses.setPassword(pass);
-            java.util.Properties config = new
-            java.util.Properties();
-            config.put("StrictHostKeyChecking", "no");
-            ses.setConfig(config);
-            ses.connect();
-            publishProgress(PROG_LOGIN);
-            ChannelExec c = (ChannelExec)ses.openChannel("exec");
-            c.setCommand("source ~/.bash_profile;glookup");
-            c.connect();
-            publishProgress(PROG_EXECUTE);
-            BufferedReader r = new BufferedReader(new InputStreamReader(c.getInputStream()));
-            StringBuilder total = new StringBuilder();
-            String line = "";
-            publishProgress(PROG_READ);
-            while ((line = r.readLine()) != null) {
-                total.append(line + "\n");
-            }
-            read = total.toString();
-            c.disconnect();
-            ses.disconnect();
-        }catch(JSchException jse){
-        	return null;
-        }catch(IOException ioe){
-        	return null;
-        }
+        
+		SSHExecute executor = new SSHExecute(uname, server, pass);
+		String read = executor.RunCommand("glookup");
         if (read.equals("")) return null;
+        
         String[] rows = read.split("\n");
         publishProgress(PROG_DONE);
         return rows;
