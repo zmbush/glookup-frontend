@@ -1,5 +1,8 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.maingrades;
 import zipcodeman.glookup.R;
+import zipcodeman.glookup.R.id;
+import zipcodeman.glookup.R.layout;
+import zipcodeman.glookup.util.GlookupRow;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -46,7 +49,7 @@ public class MainListAdapter extends BaseAdapter {
 			two.setText("Score");
 			three.setText("Weight");
 		}else{
-			GlookupGradeOutputParser.GlookupRow gr = new GlookupGradeOutputParser.GlookupRow(rows[position]);
+			GlookupRow gr = new GlookupRow(rows[position]);
 			
 			Log.i("MainListAdapter", "I found that the grader was: " + gr.grader);
 			

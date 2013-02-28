@@ -1,4 +1,4 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.subgrades;
 
 //import java.util.Random;
 

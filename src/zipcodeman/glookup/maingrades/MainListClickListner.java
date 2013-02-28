@@ -1,5 +1,6 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.maingrades;
 
+import zipcodeman.glookup.subgrades.SubGradeActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;

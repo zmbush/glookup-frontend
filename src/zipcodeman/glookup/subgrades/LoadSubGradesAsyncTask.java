@@ -1,8 +1,9 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.subgrades;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -10,12 +11,12 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 import android.app.Activity;
-import android.app.ListActivity;
+//import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 //import android.widget.Toast;
 
-public class LoadMainGradesAsyncTask extends
+public class LoadSubGradesAsyncTask extends
 		AsyncTask<String, Integer, String[]> {
 
 	public static final int PROG_INIT = 0;
@@ -24,13 +25,16 @@ public class LoadMainGradesAsyncTask extends
 	public static final int PROG_EXECUTE = 3;
 	public static final int PROG_READ = 4;
 	public static final int PROG_DONE = 5;
-	
+
 	Activity context;
 	String uname;
 	String pass;
 	String server;
+	String assign;
+	String comment;
+	
 	ProgressDialog p;
-	LoadMainGradesAsyncTask(Activity context){
+	LoadSubGradesAsyncTask(Activity context){
 		this.context = context;
 		p = new ProgressDialog(context);
 		p.setCancelable(false);
@@ -63,6 +67,8 @@ public class LoadMainGradesAsyncTask extends
 		uname = params[0];
 		pass = params[1];
 		server = params[2];
+		assign = params[3];
+		comment = params[4];
 		       
         JSch jsch = new JSch();
         Session ses;
@@ -79,7 +85,7 @@ public class LoadMainGradesAsyncTask extends
             ses.connect();
             publishProgress(PROG_LOGIN);
             ChannelExec c = (ChannelExec)ses.openChannel("exec");
-            c.setCommand("source ~/.bash_profile;glookup");
+            c.setCommand("source ~/.bash_profile;glookup -b 1 -s " + assign);
             c.connect();
             publishProgress(PROG_EXECUTE);
             BufferedReader r = new BufferedReader(new InputStreamReader(c.getInputStream()));
@@ -100,17 +106,16 @@ public class LoadMainGradesAsyncTask extends
         String[] rows = read.split("\n");
         publishProgress(PROG_DONE);
         return rows;
-        //this.setListAdapter(new MainListAdapter(rows, uname, pass, server, this));
 	}
 	
 	@Override
 	public void onPostExecute(String[] result){
 		p.dismiss();
-		ListActivity la = (ListActivity)this.context;
-		MainGradesActivity mga = (MainGradesActivity)la;
-		mga.setRows(result);
-		mga.render();
+		SubGradeActivity sga = (SubGradeActivity)this.context;
+		sga.setRows(result);
+		sga.render();
 	}
+
 	
 	@Override
 	public void onProgressUpdate(Integer ... progress){

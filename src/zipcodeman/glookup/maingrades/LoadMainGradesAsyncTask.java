@@ -1,8 +1,9 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.maingrades;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -10,12 +11,12 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 import android.app.Activity;
-//import android.app.ListActivity;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 //import android.widget.Toast;
 
-public class LoadSubGradesAsyncTask extends
+public class LoadMainGradesAsyncTask extends
 		AsyncTask<String, Integer, String[]> {
 
 	public static final int PROG_INIT = 0;
@@ -24,16 +25,13 @@ public class LoadSubGradesAsyncTask extends
 	public static final int PROG_EXECUTE = 3;
 	public static final int PROG_READ = 4;
 	public static final int PROG_DONE = 5;
-
+	
 	Activity context;
 	String uname;
 	String pass;
 	String server;
-	String assign;
-	String comment;
-	
 	ProgressDialog p;
-	LoadSubGradesAsyncTask(Activity context){
+	LoadMainGradesAsyncTask(Activity context){
 		this.context = context;
 		p = new ProgressDialog(context);
 		p.setCancelable(false);
@@ -66,8 +64,6 @@ public class LoadSubGradesAsyncTask extends
 		uname = params[0];
 		pass = params[1];
 		server = params[2];
-		assign = params[3];
-		comment = params[4];
 		       
         JSch jsch = new JSch();
         Session ses;
@@ -84,7 +80,7 @@ public class LoadSubGradesAsyncTask extends
             ses.connect();
             publishProgress(PROG_LOGIN);
             ChannelExec c = (ChannelExec)ses.openChannel("exec");
-            c.setCommand("source ~/.bash_profile;glookup -b 1 -s " + assign);
+            c.setCommand("source ~/.bash_profile;glookup");
             c.connect();
             publishProgress(PROG_EXECUTE);
             BufferedReader r = new BufferedReader(new InputStreamReader(c.getInputStream()));
@@ -102,6 +98,7 @@ public class LoadSubGradesAsyncTask extends
         }catch(IOException ioe){
         	return null;
         }
+        if (read.equals("")) return null;
         String[] rows = read.split("\n");
         publishProgress(PROG_DONE);
         return rows;
@@ -110,11 +107,11 @@ public class LoadSubGradesAsyncTask extends
 	@Override
 	public void onPostExecute(String[] result){
 		p.dismiss();
-		SubGradeActivity sga = (SubGradeActivity)this.context;
-		sga.setRows(result);
-		sga.render();
+		ListActivity la = (ListActivity)this.context;
+		MainGradesActivity mga = (MainGradesActivity)la;
+		mga.setRows(result);
+		mga.render();
 	}
-
 	
 	@Override
 	public void onProgressUpdate(Integer ... progress){

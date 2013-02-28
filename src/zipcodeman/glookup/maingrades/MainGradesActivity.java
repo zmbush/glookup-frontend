@@ -1,4 +1,4 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.maingrades;
 
 //import java.io.BufferedReader;
 //import java.io.IOException;
@@ -10,7 +10,10 @@ package zipcodeman.glookup;
 //import com.jcraft.jsch.Session;
 
 // import android.app.Activity;
+import zipcodeman.glookup.GlookupFrontendActivity;
 import zipcodeman.glookup.R;
+import zipcodeman.glookup.R.id;
+import zipcodeman.glookup.R.menu;
 import android.app.ListActivity;
 import android.content.Intent;
 //import android.content.SharedPreferences;

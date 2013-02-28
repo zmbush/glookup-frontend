@@ -1,5 +1,7 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.subgrades;
 import zipcodeman.glookup.R;
+import zipcodeman.glookup.R.id;
+import zipcodeman.glookup.R.layout;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -138,7 +140,7 @@ public class SubListAdapter extends BaseAdapter {
 				String[] paren = rows[position].replaceFirst("[ ]*", "").split("\\(");
 				if(paren.length > 1){
 					rank = paren[1].replace(")", "");
-					convertView = this.mInflater.inflate(R.layout.comment_sub_list_item, null);
+				    convertView = this.mInflater.inflate(R.layout.comment_sub_list_item, null);
 					one = (TextView)convertView.findViewById(R.id.sub_list_text_1);
 					two = (TextView)convertView.findViewById(R.id.sub_list_text_2);
 					TextView comment = (TextView)convertView.findViewById(R.id.comment_text);
@@ -160,15 +162,12 @@ public class SubListAdapter extends BaseAdapter {
 			convertView.setClickable(true);
 			convertView.setOnClickListener(new SubListClickListner(this.mParent, rows, this.getCount()));
 		}
-		
-		
-		
 		return convertView;
 	}
 
 	public int getCount() {
-		int i = 0;
-		for(; i < rows.length; i++)
+		int i;
+		for(i = 0; i < rows.length; i++)
 			if(rows[i].equals("Distribution:"))
 				break;
 		return i + 3;

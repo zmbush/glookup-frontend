@@ -1,5 +1,7 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.notification;
 
+import zipcodeman.glookup.GlookupFrontendActivity;
+import zipcodeman.glookup.util.Constants;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

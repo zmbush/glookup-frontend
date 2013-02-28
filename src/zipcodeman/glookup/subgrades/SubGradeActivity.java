@@ -1,6 +1,8 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.subgrades;
 
 import zipcodeman.glookup.R;
+import zipcodeman.glookup.R.id;
+import zipcodeman.glookup.R.menu;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Configuration;

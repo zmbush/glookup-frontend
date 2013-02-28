@@ -15,6 +15,12 @@ package zipcodeman.glookup;
 //import com.jcraft.jsch.Session;
 
 import zipcodeman.glookup.R;
+import zipcodeman.glookup.maingrades.MainGradesActivity;
+import zipcodeman.glookup.models.LoginDataHelper;
+import zipcodeman.glookup.notification.GlookupAlarmReceiver;
+import zipcodeman.glookup.util.AddUserActivity;
+import zipcodeman.glookup.util.Constants;
+import zipcodeman.glookup.util.SettingsActivity;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.ListActivity;
@@ -290,9 +296,20 @@ public class GlookupFrontendActivity extends ListActivity {
                           PendingIntent.FLAG_CANCEL_CURRENT);
         
         if (pref.getBoolean("check-for-updates", false)) {
+        	String refresh = pref.getString("refresh-frequency", "1h");
+        	long update_freq = Constants.UPDATE_FREQUENCY;
+        	switch (refresh.charAt(refresh.length() - 1)) {
+        	case 'm':
+        		update_freq = Integer.parseInt(refresh.substring(0, refresh.length() - 1)) * 60000;
+        		break;
+        	case 'h':
+        		update_freq = Integer.parseInt(refresh.substring(0, refresh.length() - 1)) * AlarmManager.INTERVAL_HOUR;
+        		break;
+        	} 
+        	
 	        // Use inexact repeating which is easier on battery (system can phase events and not wake at exact times)
 	        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, Constants.UPDATE_STARTUP_TIME,
-	                 				     Constants.UPDATE_FREQUENCY, pendingIntent);
+	                 				     update_freq, pendingIntent);
         } else {
         	alarmMgr.cancel(pendingIntent);
         }

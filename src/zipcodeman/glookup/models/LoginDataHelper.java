@@ -1,4 +1,4 @@
-package zipcodeman.glookup;
+package zipcodeman.glookup.models;
 
 import android.content.ContentValues;
 import android.content.Context;
