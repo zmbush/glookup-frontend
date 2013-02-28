@@ -19,24 +19,29 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.ListActivity;
 import android.app.PendingIntent;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import android.os.Bundle;
+
 import android.preference.PreferenceManager;
+
 import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ContextMenu.ContextMenuInfo;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,9 +69,6 @@ public class GlookupFrontendActivity extends ListActivity {
 	private LoginDataHelper dataDB;
 	private SQLiteDatabase readOnly;
 	private SQLiteDatabase writeOnly;
-	
-	private ImageButton add_user;
-	private ImageButton settings;
 	
     /** Called when the activity is first created. */
     @Override

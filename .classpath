@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="/home/zmbush/git/glookup-frontend/achartengine-0.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/zmbush/git/glookup-frontend/jsch-0.1.46.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="/home/zmbush/Downloads/achartengine-0.7.0.jar"/>
-	<classpathentry kind="lib" path="/home/zmbush/Downloads/jsch-0.1.46.jar"/>
 	<classpathentry kind="lib" path="/home/zmbush/.android-tools/extras/android/support/v4/android-support-v4.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

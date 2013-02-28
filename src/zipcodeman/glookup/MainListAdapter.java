@@ -46,39 +46,11 @@ public class MainListAdapter extends BaseAdapter {
 			two.setText("Score");
 			three.setText("Weight");
 		}else{
-			String rawRow = rows[position].replaceFirst("[ ]*", "");
-			String[] assignmentParts = rawRow.split(":", 2);
-			String assignName = assignmentParts[0];
-			String restOfAssignmentString = assignmentParts[1].replaceFirst("[ ]*", "");
+			GlookupGradeOutputParser.GlookupRow gr = new GlookupGradeOutputParser.GlookupRow(rows[position]);
 			
-			int end = restOfAssignmentString.indexOf(" ");
-			String score = "";
-			String grader = "";
-			String weight = "";
-			String comment = "";
-			if(end == -1){
-				score = restOfAssignmentString;
-				grader = "";
-			}else{
-				score = restOfAssignmentString.substring(0, end);
-				restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
-				end = restOfAssignmentString.indexOf(" ");
-				if(end != -1){
-					weight = restOfAssignmentString.substring(0, end);
-					restOfAssignmentString = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
-					end = restOfAssignmentString.indexOf(" ");
-					if(end != -1){
-						grader = restOfAssignmentString.substring(0, end);
-						comment = restOfAssignmentString.substring(end).replaceFirst("[ ]*", "");
-					}else{
-						grader = restOfAssignmentString;
-					}
-				}
-			}
+			Log.i("MainListAdapter", "I found that the grader was: " + gr.grader);
 			
-			Log.i("MainListAdapter", "I found that the grader was: " + grader);
-			
-			if(comment != ""){
+			if(gr.comment != ""){
 				convertView = this.mInflater.inflate(R.layout.comment_main_list_item, null);
 				
 				one = (TextView)convertView.findViewById(R.id.main_list_text_1);
@@ -87,18 +59,18 @@ public class MainListAdapter extends BaseAdapter {
 		    	
 		    	TextView commentText = (TextView)convertView.findViewById(R.id.comment_text);
 		    	
-				one.setText(assignName);
-				two.setText(score);
-				three.setText(weight);
-				commentText.setText(comment);
+				one.setText(gr.assignName);
+				two.setText(gr.score);
+				three.setText(gr.weight);
+				commentText.setText(gr.comment);
 			}else{
-				one.setText(assignName);
-				two.setText(score);
-				three.setText(weight);
+				one.setText(gr.assignName);
+				two.setText(gr.score);
+				three.setText(gr.weight);
 			}
-			if(!assignName.equals("Extrapolated total")){
+			if(!gr.assignName.equals("Extrapolated total")){
 				convertView.setClickable(true);
-				convertView.setOnClickListener(new MainListClickListner(comment, parent, assignName, 
+				convertView.setOnClickListener(new MainListClickListner(gr.comment, parent, gr.assignName, 
 												uname, pass, server, this.mAct));
 			}
 		}
