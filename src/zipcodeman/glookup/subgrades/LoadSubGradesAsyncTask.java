@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 //import android.widget.Toast;
+import android.util.Log;
 
 public class LoadSubGradesAsyncTask extends
 		AsyncTask<String, Integer, String[]> {
@@ -83,7 +84,11 @@ public class LoadSubGradesAsyncTask extends
 	
 	@Override
 	public void onPostExecute(String[] result){
-		p.dismiss();
+		try {
+			p.dismiss();
+		} catch (IllegalArgumentException iae) {
+			Log.e("LoadSubGradesAsyncTask", "Could not dismiss progress dialog");
+		}
 		SubGradeActivity sga = (SubGradeActivity)this.context;
 		sga.setRows(result);
 		sga.render();

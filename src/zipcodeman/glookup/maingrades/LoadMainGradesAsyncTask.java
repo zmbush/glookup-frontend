@@ -17,6 +17,7 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 //import android.widget.Toast;
+import android.util.Log;
 
 public class LoadMainGradesAsyncTask extends
 		AsyncTask<String, Integer, String[]> {
@@ -80,7 +81,11 @@ public class LoadMainGradesAsyncTask extends
 	
 	@Override
 	public void onPostExecute(String[] result){
-		p.dismiss();
+		try {
+			p.dismiss();
+		} catch (IllegalArgumentException iae) {
+			Log.e("LoadMainGradesAsyncTask", "Could not dismiss progress dialog");
+		}
 		ListActivity la = (ListActivity)this.context;
 		MainGradesActivity mga = (MainGradesActivity)la;
 		mga.setRows(result);
