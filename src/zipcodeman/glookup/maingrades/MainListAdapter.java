@@ -1,8 +1,8 @@
 package zipcodeman.glookup.maingrades;
+
 import zipcodeman.glookup.R;
-import zipcodeman.glookup.R.id;
-import zipcodeman.glookup.R.layout;
 import zipcodeman.glookup.util.GlookupRow;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;

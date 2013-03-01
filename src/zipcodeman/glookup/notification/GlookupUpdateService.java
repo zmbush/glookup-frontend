@@ -10,7 +10,6 @@ import java.util.Hashtable;
 
 import zipcodeman.glookup.GlookupFrontendActivity;
 import zipcodeman.glookup.R;
-import zipcodeman.glookup.R.drawable;
 import zipcodeman.glookup.maingrades.MainGradesActivity;
 import zipcodeman.glookup.models.LoginDataHelper;
 import zipcodeman.glookup.subgrades.SubGradeActivity;
@@ -150,6 +149,8 @@ public class GlookupUpdateService extends IntentService {
 	private void createNotification(int notifyId, String uname, String pass, String server, String comment, String assignment, boolean update){
 		NotificationManager notificationMgr = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		
+		Intent mainIntent = new Intent(this, GlookupFrontendActivity.class);
+		
 		Intent notifyIntent = new Intent(this, SubGradeActivity.class);
 		notifyIntent.putExtra(SubGradeActivity.SUB_GRADE_UNAME, uname);
 		notifyIntent.putExtra(SubGradeActivity.SUB_GRADE_PASS, pass);
@@ -164,6 +165,7 @@ public class GlookupUpdateService extends IntentService {
 		
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		stackBuilder.addParentStack(GlookupFrontendActivity.class);
+		stackBuilder.addNextIntent(mainIntent);
 		stackBuilder.addNextIntent(previousIntent);
 		stackBuilder.addNextIntent(notifyIntent);
 		
@@ -178,14 +180,5 @@ public class GlookupUpdateService extends IntentService {
 		noti.flags |= Notification.FLAG_AUTO_CANCEL;
 		
 		notificationMgr.notify(notifyId, noti);
-								
-		/*
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
-		
-		NotificationManager notificationMgr = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification notification = new Notification(android.R.drawable.star_on, "Grades for " + uname + " have been updated!", System.currentTimeMillis());
-		
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		notificationMgr.notify(notificationID, notification);*/
 	}
 }

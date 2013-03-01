@@ -2,16 +2,12 @@ package zipcodeman.glookup.util;
 
 import zipcodeman.glookup.GlookupFrontendActivity;
 import zipcodeman.glookup.R;
-import zipcodeman.glookup.R.array;
-import zipcodeman.glookup.R.id;
-import zipcodeman.glookup.R.layout;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
-//import android.widget.Toast;
 
 
 public class AddUserActivity extends Activity {

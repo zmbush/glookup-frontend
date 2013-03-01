@@ -1,29 +1,15 @@
 package zipcodeman.glookup.maingrades;
 
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-
-//import com.jcraft.jsch.ChannelExec;
-//import com.jcraft.jsch.JSch;
-//import com.jcraft.jsch.JSchException;
-//import com.jcraft.jsch.Session;
-
-// import android.app.Activity;
 import zipcodeman.glookup.GlookupFrontendActivity;
 import zipcodeman.glookup.R;
-import zipcodeman.glookup.R.id;
-import zipcodeman.glookup.R.menu;
 import android.app.ListActivity;
 import android.content.Intent;
-//import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-//import android.widget.Toast;
 
 public class MainGradesActivity extends ListActivity {
 	

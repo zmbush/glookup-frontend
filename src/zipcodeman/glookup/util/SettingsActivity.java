@@ -1,7 +1,6 @@
 package zipcodeman.glookup.util;
 
 import zipcodeman.glookup.R;
-import zipcodeman.glookup.R.xml;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 

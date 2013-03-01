@@ -1,22 +1,10 @@
 package zipcodeman.glookup.subgrades;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import zipcodeman.glookup.util.SSHExecute;
 
-
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
-
 import android.app.Activity;
-//import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-//import android.widget.Toast;
 import android.util.Log;
 
 public class LoadSubGradesAsyncTask extends
