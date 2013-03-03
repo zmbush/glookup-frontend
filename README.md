@@ -1,5 +1,11 @@
 ## Release Notes
 ```
+2.1 (Beta):
+  - Stop storing user passwords in the database
+  + Switch over to SSH Key pairs
+  + UI Updates
+  + Adding User now actually checks if username/password combination is valid
+
 2.0 (Beta):
   + Add notifications
   * Bug Fixes
