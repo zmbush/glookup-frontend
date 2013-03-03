@@ -102,6 +102,8 @@ public class GlookupUpdateService extends IntentService {
                     			int id = uid * 1000;
                     			for (GlookupRow grade : newGrades) {
                     				id += 1;
+                    				if (grade.getCurrentGrade() < 0) continue;
+                    				
                     				if (oldGrades.containsKey(grade.assignName)) {
                     					GlookupRow oldGrade = oldGrades.get(grade.assignName);
                     					if (oldGrade.getCurrentGrade() != grade.getCurrentGrade()) {

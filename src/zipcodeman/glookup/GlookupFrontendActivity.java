@@ -1,32 +1,19 @@
 package zipcodeman.glookup;
 
-//import java.io.BufferedInputStream;
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.io.InputStreamReader;
-//import java.io.OutputStream;
-//import java.util.Map;
-//
-//import com.jcraft.jsch.Channel;
-//import com.jcraft.jsch.ChannelExec;
-//import com.jcraft.jsch.JSch;
-//import com.jcraft.jsch.JSchException;
-//import com.jcraft.jsch.Session;
-
 import zipcodeman.glookup.R;
+import zipcodeman.glookup.authentication.AddUserActivity;
+import zipcodeman.glookup.authentication.AddUserAsyncTask;
 import zipcodeman.glookup.maingrades.MainGradesActivity;
 import zipcodeman.glookup.models.LoginDataHelper;
 import zipcodeman.glookup.notification.GlookupAlarmReceiver;
-import zipcodeman.glookup.util.AddUserActivity;
 import zipcodeman.glookup.util.Constants;
 import zipcodeman.glookup.util.SettingsActivity;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.ListActivity;
 import android.app.PendingIntent;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,7 +37,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 // TODO: Move to ssh keys. Perhaps more secure.
@@ -99,7 +85,7 @@ public class GlookupFrontendActivity extends ListActivity {
       super.onConfigurationChanged(newConfig);
     }
     
-    private void loadList(){
+    public void loadList(){
     	SQLiteDatabase read = readOnly;
     	Cursor rows = read.query("Users", null, null, null, null, null, null);
     	if(rows != null)
@@ -222,33 +208,16 @@ public class GlookupFrontendActivity extends ListActivity {
     			String pass = data.getExtras().getString(ADD_USER_PASSWORD);
     			String server = data.getExtras().getString(ADD_USER_SERVER);
     			
-    			SQLiteDatabase edit = writeOnly;
-    			
-    			ContentValues values = new ContentValues(3);
-    			values.put("uname", uname);
-    			values.put("pass", pass);
-    			values.put("server", server);
-    			edit.insert("Users", null, values);
-    			
-    			Toast.makeText(this, "Added user: " + uname, Toast.LENGTH_LONG).show();
-    			loadList();
+    			new AddUserAsyncTask(this, true, writeOnly).execute(uname, pass, server, "");
     		}
     	}else if(requestCode == EDIT_USER_RESULT){
     		if(resultCode == Activity.RESULT_OK){
     			String uname = data.getExtras().getString(ADD_USER_USERNAME);
     			String pass = data.getExtras().getString(ADD_USER_PASSWORD);
     			String server = data.getExtras().getString(ADD_USER_SERVER);
-    			int uid = data.getIntExtra(ADD_USER_ID, -1);
-    			if(uid > 0){
-    				SQLiteDatabase edit = writeOnly;
-    				
-    				ContentValues vals = new ContentValues(3);
-    				vals.put("uname", uname);
-    				vals.put("pass", pass);
-    				vals.put("server", server);
-    				edit.update("Users", vals, "user_id = " + uid, null);
-    				loadList();
-    			}
+    			Integer uid = data.getIntExtra(ADD_USER_ID, -1);
+    			
+    			new AddUserAsyncTask(this, false, writeOnly).execute(uname, pass, server, uid.toString());
     		}
     	} else if(requestCode == PREFERENCES_RESULT) {
     		scheduleAlarmReceiver();
@@ -273,13 +242,18 @@ public class GlookupFrontendActivity extends ListActivity {
     	GlookupFrontendActivity.this.startActivityForResult(addUser, ADD_USER_RESULT);
     }
 
-    private void editAccount(int id, String uname, String pass, String server){
+    public void editAccount(String uname, String pass, String server) {
+    	editAccount(-2, uname, pass, server);
+    }
+    
+    public void editAccount(int id, String uname, String pass, String server){
     	Intent editUser = new Intent(this, AddUserActivity.class);
     	editUser.putExtra(ADD_USER_ID, id);
     	editUser.putExtra(ADD_USER_USERNAME, uname);
     	editUser.putExtra(ADD_USER_PASSWORD, pass);
     	editUser.putExtra(ADD_USER_SERVER, server);
-    	GlookupFrontendActivity.this.startActivityForResult(editUser, EDIT_USER_RESULT);
+    	GlookupFrontendActivity.this.startActivityForResult(editUser, 
+    			                     (id >= 0) ? EDIT_USER_RESULT : ADD_USER_RESULT);
     }
     
     private void scheduleAlarmReceiver() {

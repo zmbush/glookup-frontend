@@ -59,7 +59,7 @@ public class LoadMainGradesAsyncTask extends
 		
         publishProgress(PROG_INIT);
         
-		SSHExecute executor = new SSHExecute(uname, server, pass);
+		SSHExecute executor = new SSHExecute(context, uname, server, pass);
 		String read = executor.RunCommand("glookup");
         if (read.equals("")) return null;
         

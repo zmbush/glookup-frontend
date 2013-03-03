@@ -62,7 +62,7 @@ public class LoadSubGradesAsyncTask extends
 		comment = params[4];
 		
 		publishProgress(PROG_INIT);
-		SSHExecute executor = new SSHExecute(uname, server, pass);
+		SSHExecute executor = new SSHExecute(context, uname, server, pass);
 		String read = executor.RunCommand("glookup -b 1 -s " + assign);
 		if (read == "") return null;
         String[] rows = read.split("\n");
