@@ -48,6 +48,10 @@ public class DSAKeys {
     	return SHA(uname + Constants.DB_SECRET + this.server);
     }
     
+    public static boolean removeKeys(String uname) {
+    	return new DSAKeys(null, uname, null).removeKeys();
+    }
+    
     public boolean removeKeys() {
     	return c.deleteFile(uname + "_dsa.pub") && c.deleteFile(uname + "_dsa");
     }

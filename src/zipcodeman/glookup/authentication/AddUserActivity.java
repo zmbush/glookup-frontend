@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 public class AddUserActivity extends Activity {
     private int uid;
+    private String oldUname;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,8 @@ public class AddUserActivity extends Activity {
         	// TextView pass = (TextView) findViewById(R.id.addUserPasswordText);
         	Spinner server = (Spinner) findViewById(R.id.addUserServerSelect);
 
-        	uname.setText(incoming.getStringExtra(GlookupFrontendActivity.ADD_USER_USERNAME));
+        	oldUname = incoming.getStringExtra(GlookupFrontendActivity.ADD_USER_USERNAME);
+        	uname.setText(oldUname);
         	// pass.setText(incoming.getStringExtra(GlookupFrontendActivity.ADD_USER_PASSWORD));
         	
         	String[] servers = this.getResources().getStringArray(R.array.server_list);
@@ -59,6 +61,9 @@ public class AddUserActivity extends Activity {
     							.create();
     		ad.show();
     		return;
+    	}
+    	if (oldUname.equals(uname.getText().toString())) {
+    		DSAKeys.removeKeys(oldUname);
     	}
     	Spinner server = (Spinner) findViewById(R.id.addUserServerSelect);
     	TextView server_selected = (TextView) server.getSelectedView().findViewById(android.R.id.text1);

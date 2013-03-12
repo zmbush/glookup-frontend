@@ -3,6 +3,7 @@ package zipcodeman.glookup;
 import zipcodeman.glookup.R;
 import zipcodeman.glookup.authentication.AddUserActivity;
 import zipcodeman.glookup.authentication.AddUserAsyncTask;
+import zipcodeman.glookup.authentication.DSAKeys;
 import zipcodeman.glookup.maingrades.MainGradesActivity;
 import zipcodeman.glookup.models.LoginDataHelper;
 import zipcodeman.glookup.notification.GlookupAlarmReceiver;
@@ -45,6 +46,8 @@ public class GlookupFrontendActivity extends ListActivity {
 	public static final int ADD_USER_RESULT = 0;
 	public static final int EDIT_USER_RESULT = 1;
 	public static final int PREFERENCES_RESULT = 2;
+	public static final int NOT_A_USER_ID = -1;
+	public static final int INVALID_USER_ID = -2;
 	public static final String ADD_USER_USERNAME = "username";
 	public static final String ADD_USER_PASSWORD = "password";
 	public static final String ADD_USER_SERVER = "server";
@@ -159,6 +162,7 @@ public class GlookupFrontendActivity extends ListActivity {
     	case 0:
 	    	if(row != null){
 	    		row.moveToFirst();
+	    		DSAKeys.removeKeys(row.getString(1));
 		    	if(row.getCount() >= 1){
 		    		sld.delete("Users",  "user_id=" + row.getInt(0), null);
 		    	}
@@ -243,7 +247,7 @@ public class GlookupFrontendActivity extends ListActivity {
     }
 
     public void editAccount(String uname, String pass, String server) {
-    	editAccount(-2, uname, pass, server);
+    	editAccount(INVALID_USER_ID, uname, pass, server);
     }
     
     public void editAccount(int id, String uname, String pass, String server){
