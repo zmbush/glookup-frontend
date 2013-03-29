@@ -107,11 +107,13 @@ public class GlookupUpdateService extends IntentService {
         				Log.d(Constants.UPDATE_SERVICE_TAG, "IO Exception");
         			} finally {
         				try {
-        					Log.d(Constants.UPDATE_SERVICE_TAG, "Writing Data");
-        					FileOutputStream fos = openFileOutput(uid + "-data", Context.MODE_PRIVATE);
-        					fos.write(read.getBytes());
-        					fos.close();
-        					Log.d(Constants.UPDATE_SERVICE_TAG, "Data Write Complete");
+        					if (!read.equals("")) {
+	        					Log.d(Constants.UPDATE_SERVICE_TAG, "Writing Data");
+	        					FileOutputStream fos = openFileOutput(uid + "-data", Context.MODE_PRIVATE);
+	        					fos.write(read.getBytes());
+	        					fos.close();
+	        					Log.d(Constants.UPDATE_SERVICE_TAG, "Data Write Complete");
+        					}
         				} catch (FileNotFoundException fnfe) {
             				Log.d(Constants.UPDATE_SERVICE_TAG, "Could not write to data file");
         				} catch (IOException ioe) {

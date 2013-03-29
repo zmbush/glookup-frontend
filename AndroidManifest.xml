@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="zipcodeman.glookup" android:versionName="2.1 Beta RC1"
+	package="zipcodeman.glookup" android:versionName="2.1 Beta"
 	android:versionCode="14">
 	<uses-sdk android:targetSdkVersion="20" android:minSdkVersion="8" />
 	<uses-permission android:name="android.permission.INTERNET" />
