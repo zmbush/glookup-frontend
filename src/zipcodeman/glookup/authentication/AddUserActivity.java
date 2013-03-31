@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class AddUserActivity extends Activity {
     private int uid;
-    private String oldUname;
+    private String oldUname = "";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class AddUserActivity extends Activity {
     		return;
     	}
     	if (oldUname.equals(uname.getText().toString())) {
-    		DSAKeys.removeKeys(oldUname);
+    		DSAKeys.removeKeys(this, oldUname);
     	}
     	Spinner server = (Spinner) findViewById(R.id.addUserServerSelect);
     	TextView server_selected = (TextView) server.getSelectedView().findViewById(android.R.id.text1);

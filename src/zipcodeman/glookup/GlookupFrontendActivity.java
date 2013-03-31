@@ -162,7 +162,7 @@ public class GlookupFrontendActivity extends ListActivity {
     	case 0:
 	    	if(row != null){
 	    		row.moveToFirst();
-	    		DSAKeys.removeKeys(row.getString(1));
+	    		DSAKeys.removeKeys(this, row.getString(1));
 	    		deleteFile(row.getInt(0) + "-data");
 		    	if(row.getCount() >= 1){
 		    		sld.delete("Users",  "user_id=" + row.getInt(0), null);
